@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>sign_in_page.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+sign_in_page.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">common</span><span class="s2">.</span><span class="s1">by </span><span class="s0">import </span><span class="s1">By</span>
+<span class="s0">from </span><span class="s1">pages</span><span class="s2">.</span><span class="s1">base_page </span><span class="s0">import </span><span class="s1">Page</span>
+
+
+<span class="s0">class </span><span class="s1">SignInPage</span><span class="s2">(</span><span class="s1">Page</span><span class="s2">):</span>
+    <span class="s1">USERNAME_INPUT </span><span class="s2">= (</span><span class="s1">By</span><span class="s2">.</span><span class="s1">ID</span><span class="s2">, </span><span class="s3">'email-2'</span><span class="s2">)</span>
+    <span class="s1">PASSWORD_INPUT </span><span class="s2">= (</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">'//input[@data-name=&quot;Password&quot;]'</span><span class="s2">)</span>
+    <span class="s1">CONTINUE_BUTTON </span><span class="s2">= (</span><span class="s1">By</span><span class="s2">.</span><span class="s1">XPATH</span><span class="s2">, </span><span class="s3">'//*[@class=&quot;login-button w-button&quot;]'</span><span class="s2">)</span>
+
+
+    <span class="s0">def </span><span class="s1">open_sign_in_page</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">open_url</span><span class="s2">(</span><span class="s3">'https://soft.reelly.io/sign-in'</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">enter_username</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">wait_until_element_appear</span><span class="s2">(*</span><span class="s1">self</span><span class="s2">.</span><span class="s1">USERNAME_INPUT</span><span class="s2">)</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">input_text</span><span class="s2">(</span><span class="s3">'lgodiva0808@gmail.com'</span><span class="s2">, *</span><span class="s1">self</span><span class="s2">.</span><span class="s1">USERNAME_INPUT</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">enter_password</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">wait_until_element_appear</span><span class="s2">(*</span><span class="s1">self</span><span class="s2">.</span><span class="s1">PASSWORD_INPUT</span><span class="s2">)</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">input_text</span><span class="s2">(</span><span class="s3">'Ukraine#1'</span><span class="s2">, *</span><span class="s1">self</span><span class="s2">.</span><span class="s1">PASSWORD_INPUT</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">click_continue_button</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">wait_until_clickable_click</span><span class="s2">(*</span><span class="s1">self</span><span class="s2">.</span><span class="s1">CONTINUE_BUTTON</span><span class="s2">)</span>
+</pre>
+</body>
+</html>

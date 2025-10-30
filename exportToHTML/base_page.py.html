@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>base_page.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+base_page.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">asyncio </span><span class="s0">import </span><span class="s1">timeout</span>
+
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support </span><span class="s0">import </span><span class="s1">expected_conditions </span><span class="s0">as </span><span class="s1">EC</span>
+<span class="s0">from </span><span class="s1">selenium</span><span class="s2">.</span><span class="s1">webdriver</span><span class="s2">.</span><span class="s1">support</span><span class="s2">.</span><span class="s1">wait </span><span class="s0">import </span><span class="s1">WebDriverWait</span>
+
+
+<span class="s0">class </span><span class="s1">Page</span><span class="s2">:</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">,</span><span class="s1">drive</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">timeout </span><span class="s2">= </span><span class="s1">timeout</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">driver </span><span class="s2">= </span><span class="s1">drive</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">wait </span><span class="s2">= </span><span class="s1">WebDriverWait</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">, </span><span class="s3">10</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">open_url</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">url</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">url</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">find_element</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, *</span><span class="s1">locator</span><span class="s2">):</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(*</span><span class="s1">locator</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">find_elements</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, *</span><span class="s1">locator</span><span class="s2">):</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">find_elements</span><span class="s2">(*</span><span class="s1">locator</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">click</span><span class="s2">(</span><span class="s1">self</span><span class="s2">,*</span><span class="s1">locator</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(*</span><span class="s1">locator</span><span class="s2">).</span><span class="s1">click</span><span class="s2">()</span>
+
+    <span class="s0">def </span><span class="s1">input_text</span><span class="s2">(</span><span class="s1">self</span><span class="s2">,</span><span class="s1">text</span><span class="s2">,*</span><span class="s1">locator</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(*</span><span class="s1">locator</span><span class="s2">).</span><span class="s1">send_keys</span><span class="s2">(</span><span class="s1">text</span><span class="s2">)</span>
+
+
+
+    <span class="s0">def </span><span class="s1">wait_until_clickable_click</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, *</span><span class="s1">locator</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+            <span class="s1">EC</span><span class="s2">.</span><span class="s1">element_to_be_clickable</span><span class="s2">(</span><span class="s1">locator</span><span class="s2">),</span>
+            <span class="s1">message</span><span class="s2">=</span><span class="s4">f'Element by </span><span class="s0">{</span><span class="s1">locator</span><span class="s0">} </span><span class="s4">not clickable.'</span>
+        <span class="s2">).</span><span class="s1">click</span><span class="s2">()</span>
+
+    <span class="s0">def </span><span class="s1">wait_until_element_appear</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, *</span><span class="s1">locator</span><span class="s2">):</span>
+         <span class="s1">element </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+             <span class="s1">EC</span><span class="s2">.</span><span class="s1">visibility_of_element_located</span><span class="s2">(</span><span class="s1">locator</span><span class="s2">),</span>
+             <span class="s1">message</span><span class="s2">=</span><span class="s4">f'Element by </span><span class="s0">{</span><span class="s1">locator</span><span class="s0">} </span><span class="s4">did not appear.'</span>
+         <span class="s2">)</span>
+         <span class="s0">return </span><span class="s1">element</span>
+
+
+    <span class="s0">def </span><span class="s1">wait_until_element_disappear</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, *</span><span class="s1">locator</span><span class="s2">):</span>
+         <span class="s1">self</span><span class="s2">.</span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span>
+             <span class="s1">EC</span><span class="s2">.</span><span class="s1">invisibility_of_element</span><span class="s2">(</span><span class="s1">locator</span><span class="s2">),</span>
+             <span class="s1">message</span><span class="s2">=</span><span class="s4">f'Element by </span><span class="s0">{</span><span class="s1">locator</span><span class="s0">} </span><span class="s4">did not disappear.'</span>
+         <span class="s2">)</span>
+
+
+
+    <span class="s0">def </span><span class="s1">verify_text</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">expected_text</span><span class="s2">,*</span><span class="s1">locator</span><span class="s2">):</span>
+        <span class="s1">actual_text </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(*</span><span class="s1">locator</span><span class="s2">).</span><span class="s1">text</span>
+        <span class="s0">assert </span><span class="s1">expected_text </span><span class="s2">==</span><span class="s1">actual_text</span><span class="s2">,</span><span class="s1">\</span>
+             <span class="s4">f'Expected </span><span class="s0">{</span><span class="s1">expected_text</span><span class="s0">} </span><span class="s4">did not match </span><span class="s0">{</span><span class="s1">actual_text</span><span class="s0">}</span><span class="s4">'</span>
+
+    <span class="s0">def </span><span class="s1">verify_partial_text</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">expected_partial_text</span><span class="s2">,*</span><span class="s1">locator</span><span class="s2">):</span>
+        <span class="s1">actual_text </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">find_element</span><span class="s2">(*</span><span class="s1">locator</span><span class="s2">).</span><span class="s1">text</span>
+        <span class="s0">assert </span><span class="s1">expected_partial_text </span><span class="s2">==</span><span class="s1">actual_text</span><span class="s2">,</span><span class="s1">\</span>
+             <span class="s4">f'Expected </span><span class="s0">{</span><span class="s1">expected_partial_text</span><span class="s0">} </span><span class="s4">not in </span><span class="s0">{</span><span class="s1">actual_text</span><span class="s0">}</span><span class="s4">'</span>
+
+    <span class="s0">def </span><span class="s1">verify_url</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">expected_url</span><span class="s2">):</span>
+        <span class="s1">actual_url </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">current_url</span>
+        <span class="s0">assert </span><span class="s1">expected_url </span><span class="s2">== </span><span class="s1">actual_url</span><span class="s2">,</span><span class="s1">\</span>
+             <span class="s4">f'Expected </span><span class="s0">{</span><span class="s1">expected_url</span><span class="s0">} </span><span class="s4">did not match </span><span class="s0">{</span><span class="s1">actual_url</span><span class="s0">}</span><span class="s4">'</span>
+
+    <span class="s0">def </span><span class="s1">verify_partial_url</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">expected_partial_url</span><span class="s2">):</span>
+        <span class="s1">actual_url </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">current_url</span>
+        <span class="s0">assert </span><span class="s1">expected_partial_url </span><span class="s2">== </span><span class="s1">actual_url</span><span class="s2">,</span><span class="s1">\</span>
+             <span class="s4">f'Expected </span><span class="s0">{</span><span class="s1">expected_partial_url</span><span class="s0">} </span><span class="s4">did not match </span><span class="s0">{</span><span class="s1">actual_url</span><span class="s0">}</span><span class="s4">'</span>
+
+
+    <span class="s0">def </span><span class="s1">wait_until_url_contains</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">text</span><span class="s2">):</span>
+        <span class="s1">WebDriverWait</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">, </span><span class="s3">10</span><span class="s2">).</span><span class="s1">until</span><span class="s2">(</span>
+            <span class="s1">EC</span><span class="s2">.</span><span class="s1">url_contains</span><span class="s2">(</span><span class="s1">text</span><span class="s2">),</span>
+            <span class="s1">message</span><span class="s2">=</span><span class="s4">f&quot;URL did not contain '</span><span class="s0">{</span><span class="s1">text</span><span class="s0">}</span><span class="s4">' within </span><span class="s0">{</span><span class="s1">self</span><span class="s2">.</span><span class="s1">timeout</span><span class="s0">} </span><span class="s4">seconds&quot;</span>
+        <span class="s2">)</span>
+
+
+    <span class="s0">def </span><span class="s1">switch_to_newly_opened_window</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">wait</span><span class="s2">.</span><span class="s1">until</span><span class="s2">(</span><span class="s1">EC</span><span class="s2">.</span><span class="s1">new_window_is_opened</span><span class="s2">)</span>
+        <span class="s1">current_windows </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">window_handles</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">switch_to</span><span class="s2">.</span><span class="s1">window</span><span class="s2">(</span><span class="s1">current_windows</span><span class="s2">[-</span><span class="s3">1</span><span class="s2">])</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">'Current windows:'</span><span class="s2">, </span><span class="s1">current_windows</span><span class="s2">)</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">'Switching to window:'</span><span class="s2">, </span><span class="s1">current_windows</span><span class="s2">[</span><span class="s3">1</span><span class="s2">])</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">switch_to</span><span class="s2">.</span><span class="s1">window</span><span class="s2">(</span><span class="s1">current_windows</span><span class="s2">[</span><span class="s3">1</span><span class="s2">])</span>
+
+    <span class="s0">def </span><span class="s1">close</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+
+    <span class="s0">def </span><span class="s1">switch_to_window_by_id</span><span class="s2">(</span><span class="s1">self</span><span class="s2">,</span><span class="s1">window_id</span><span class="s2">):</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">'Switching to window: '</span><span class="s2">, </span><span class="s1">window_id</span><span class="s2">)</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">driver</span><span class="s2">.</span><span class="s1">switch_to</span><span class="s2">.</span><span class="s1">window</span><span class="s2">(</span><span class="s1">window_id</span><span class="s2">)</span></pre>
+</body>
+</html>
