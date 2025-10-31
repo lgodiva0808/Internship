@@ -8,4 +8,10 @@ class SettingsPage(Page):
 
     def click_community(self):
         sleep(5)
-        self.wait_until_clickable_click(*self.COMMUNITY_OPT)
+        print(">>> Trying to click Community button (JS method)...")
+        element = self.find_element(*self.COMMUNITY_OPT)
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        sleep(1)
+        self.driver.execute_script("arguments[0].click();", element)
+        print(">>> Clicked Community via JavaScript.")
+        sleep(5)

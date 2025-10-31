@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.webdriver.common.by import By
 from pages.base_page import Page
 
@@ -10,14 +12,19 @@ class SignInPage(Page):
 
     def open_sign_in_page(self):
         self.open_url('https://soft.reelly.io/sign-in')
+        sleep(2) # headless: allow page to Load fully
 
     def enter_username(self):
-        self.wait_until_element_appear(*self.USERNAME_INPUT)
+        sleep(1)
         self.input_text('lgodiva0808@gmail.com', *self.USERNAME_INPUT)
+        sleep(1)
 
     def enter_password(self):
-        self.wait_until_element_appear(*self.PASSWORD_INPUT)
+        sleep(1)
         self.input_text('Ukraine#1', *self.PASSWORD_INPUT)
+        sleep(1)
 
     def click_continue_button(self):
-        self.wait_until_clickable_click(*self.CONTINUE_BUTTON)
+        sleep(3)
+        self.click(*self.CONTINUE_BUTTON)
+        sleep(5) #wait for redirect after Login

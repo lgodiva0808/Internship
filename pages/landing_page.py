@@ -8,4 +8,11 @@ class LandingPage(Page):
 
     def click_settings(self):
         sleep(10)
-        self.click(*self.SETTINGS)
+        print(">>> Trying to click Settings button (JS method)...")
+        element = self.find_element(*self.SETTINGS)
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        sleep(1)
+        self.driver.execute_script("arguments[0].click();", element)
+        print(">>> Clicked Settings via JavaScript.")
+        sleep(5)
+

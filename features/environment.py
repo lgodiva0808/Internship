@@ -16,14 +16,14 @@ def browser_init(context, scenario_name):
     # service = Service(driver_path)
     # context.driver = webdriver.Chrome(service=service)
 
-    # options=webdriver.ChromeOptions()
-    # options.add_argument('headless')
-    # context.driver = webdriver.Chrome(options=options)
+    options=webdriver.ChromeOptions()
+    options.add_argument('headless')
+    context.driver = webdriver.Chrome(options=options)
 
 
 
     ### SAFARI ###
-    context.driver = webdriver.Firefox()
+    # context.driver = webdriver.Firefox()
 
     ### BROWSERSTACK ###
 
