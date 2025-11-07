@@ -12,13 +12,19 @@ def browser_init(context, scenario_name):
     """
     :param context: Behave context
     """
-    # driver_path = ChromeDriverManager().install()
-    # service = Service(driver_path)
-    # context.driver = webdriver.Chrome(service=service)
 
-    options=webdriver.ChromeOptions()
-    options.add_argument('headless')
-    context.driver = webdriver.Chrome(options=options)
+    mobile_emulation = {"deviceName": "iPhone 14 Pro Max"}
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+
+
+    driver_path = ChromeDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Chrome(service=service, options=chrome_options)
+
+    # options=webdriver.ChromeOptions()
+    # options.add_argument('headless')
+    # context.driver = webdriver.Chrome(options=options)
 
 
 
@@ -33,8 +39,8 @@ def browser_init(context, scenario_name):
     #
     # options = Options()
     # bstack_options = {
-    #     "os": "Windows",
-    #     "osVersion": "11",
+    #     "os": "OS X",
+    #     "osVersion": "Sonoma",
     #     "browserName": 'Edge',
     #     "sessionName": scenario_name,
     # }

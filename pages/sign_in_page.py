@@ -15,16 +15,13 @@ class SignInPage(Page):
         sleep(2) # headless: allow page to Load fully
 
     def enter_username(self):
-        sleep(1)
+        self.wait_until_element_appear(*self.USERNAME_INPUT)
         self.input_text('lgodiva0808@gmail.com', *self.USERNAME_INPUT)
-        sleep(1)
 
     def enter_password(self):
-        sleep(1)
+        self.wait_until_element_appear(*self.PASSWORD_INPUT)
         self.input_text('Ukraine#1', *self.PASSWORD_INPUT)
-        sleep(1)
 
     def click_continue_button(self):
-        sleep(3)
-        self.click(*self.CONTINUE_BUTTON)
-        sleep(5) #wait for redirect after Login
+        self.wait_until_clickable_click(*self.CONTINUE_BUTTON)
+        sleep(3) #wait for redirect after Login

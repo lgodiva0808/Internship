@@ -9,6 +9,13 @@ from time import sleep
 def click_settings(context):
     context.app.landing_page.click_settings()
 
+@when('Click Menu option')
+def click_menu(context):
+    context.app.landing_page.click_menu()
+
+
+
+
 
 
     

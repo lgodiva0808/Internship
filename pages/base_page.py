@@ -91,3 +91,8 @@ class Page:
     def switch_to_window_by_id(self,window_id):
         print('Switching to window: ', window_id)
         self.driver.switch_to.window(window_id)
+
+    def scroll_to_element(self, *locator):
+        element = self.wait_until_element_appear(*locator)
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        return element

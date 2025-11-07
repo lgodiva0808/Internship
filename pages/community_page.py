@@ -15,6 +15,7 @@ class CommunityPage(Page):
 
     def verify_contact_support_button(self):
         sleep(4)
+        self.scroll_to_element(*self.CONTACT_SUPPORT_BTN)
         result = self.find_elements(*self.CONTACT_SUPPORT_BTN)
         result = result[2].text
         assert result == 'Contact support', 'Contact support button not found'
